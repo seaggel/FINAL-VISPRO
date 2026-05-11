@@ -1,0 +1,115 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="CrossPlatformApp.Views.KonselorWindow"
+        Title="Konselor"
+        Width="1100" Height="760"
+        WindowStartupLocation="CenterScreen">
+  <Border Padding="20" Background="#F8FAFC">
+    <Grid RowDefinitions="Auto,Auto,*,Auto">
+      <Grid ColumnDefinitions="*,Auto" Margin="0,0,0,16">
+        <StackPanel Spacing="4">
+          <TextBlock Text="Konselor" FontSize="30" FontWeight="Bold" Foreground="#0F172A" />
+          <TextBlock Text="Sesi dan mahasiswa." Foreground="#475569" />
+        </StackPanel>
+
+        <Border Grid.Column="1" Background="#E2E8F0" CornerRadius="16" Padding="12" VerticalAlignment="Top">
+          <StackPanel Spacing="8">
+            <TextBlock x:Name="SessionText" Text="Session: -" Foreground="#0F172A" FontWeight="SemiBold" />
+            <StackPanel Orientation="Horizontal" Spacing="8">
+              <Button Content="Refresh" Click="Refresh_Click" />
+              <Button Content="Logout" Click="Logout_Click" />
+            </StackPanel>
+          </StackPanel>
+        </Border>
+      </Grid>
+
+      <Grid Grid.Row="1" ColumnDefinitions="*,*" Margin="0,0,0,16">
+        <Border Background="#FEF3C7" CornerRadius="14" Padding="14" Margin="0,0,12,0">
+          <StackPanel Spacing="4">
+            <TextBlock Text="Sesi Saya" Foreground="#334155" />
+            <TextBlock x:Name="SesiSayaCountText" FontSize="24" FontWeight="Bold" Foreground="#0F172A" />
+          </StackPanel>
+        </Border>
+        <Border Grid.Column="1" Background="#EFF6FF" CornerRadius="14" Padding="14">
+          <StackPanel Spacing="4">
+            <TextBlock Text="Mahasiswa" Foreground="#334155" />
+            <TextBlock x:Name="MahasiswaCountText" FontSize="24" FontWeight="Bold" Foreground="#0F172A" />
+          </StackPanel>
+        </Border>
+      </Grid>
+
+      <TabControl Grid.Row="2">
+        <TabItem Header="Sesi Saya">
+          <Grid ColumnDefinitions="2*,3*" Margin="0,14,0,0">
+            <Border Background="#FFFFFF" CornerRadius="16" Padding="12" Margin="0,0,12,0">
+              <StackPanel Spacing="10">
+                <TextBlock Text="Buat Sesi" FontSize="16" FontWeight="Bold" Foreground="#0F172A" />
+                <ComboBox x:Name="NewSessionMahasiswaComboBox" />
+                <TextBox x:Name="NewSessionTopikTextBox" Watermark="Topik" />
+                <Button Content="Buat" Click="CreateSessionButton_Click" />
+              </StackPanel>
+            </Border>
+
+            <Border Grid.Column="1" Background="#FFFFFF" CornerRadius="16" Padding="12">
+              <StackPanel Spacing="10">
+                <TextBlock Text="Daftar" FontSize="16" FontWeight="Bold" Foreground="#0F172A" />
+                <ListBox x:Name="MySessionsListBox" Height="360" SelectionChanged="MySessionsListBox_SelectionChanged" />
+                <TextBlock x:Name="SelectedSessionInfo" TextWrapping="Wrap" Height="180" />
+                <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto,Auto">
+                  <StackPanel Margin="0,0,8,0" Spacing="4">
+                    <TextBlock Text="Tanggal" Foreground="#64748B" FontSize="12" />
+                    <DatePicker x:Name="SelectedSessionDatePicker" />
+                  </StackPanel>
+
+                  <StackPanel Grid.Column="1" Margin="8,0,0,0" Spacing="4">
+                    <TextBlock Text="Status" Foreground="#64748B" FontSize="12" />
+                    <ComboBox x:Name="SelectedSessionStatusComboBox" />
+                  </StackPanel>
+
+                  <StackPanel Grid.Row="1" Margin="0,8,8,0" Spacing="4">
+                    <TextBlock Text="Mulai" Foreground="#64748B" FontSize="12" />
+                    <TimePicker x:Name="SelectedSessionMulaiTimePicker" />
+                  </StackPanel>
+
+                  <StackPanel Grid.Row="1" Grid.Column="1" Margin="8,8,0,0" Spacing="4">
+                    <TextBlock Text="Selesai" Foreground="#64748B" FontSize="12" />
+                    <TimePicker x:Name="SelectedSessionSelesaiTimePicker" />
+                  </StackPanel>
+
+                  <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Margin="0,8,0,0" Spacing="4">
+                    <TextBlock Text="Topik" Foreground="#64748B" FontSize="12" />
+                    <TextBox x:Name="SelectedSessionTopikTextBox" Watermark="Topik baru" />
+                  </StackPanel>
+                </Grid>
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                  <Button Content="Ubah" Click="UpdateSessionButton_Click" />
+                  <Button Content="Hapus" Click="DeleteSessionButton_Click" />
+                </StackPanel>
+              </StackPanel>
+            </Border>
+          </Grid>
+        </TabItem>
+
+        <TabItem Header="Mahasiswa">
+          <Grid ColumnDefinitions="2*,3*" Margin="0,14,0,0">
+            <Border Background="#FFFFFF" CornerRadius="16" Padding="12" Margin="0,0,12,0">
+              <StackPanel Spacing="10">
+                <TextBlock Text="Daftar" FontSize="16" FontWeight="Bold" Foreground="#0F172A" />
+                <ListBox x:Name="StudentListBox" Height="520" SelectionChanged="StudentListBox_SelectionChanged" />
+              </StackPanel>
+            </Border>
+
+            <ScrollViewer Grid.Column="1">
+              <StackPanel Spacing="10">
+                <TextBlock Text="Detail" FontSize="16" FontWeight="Bold" Foreground="#0F172A" />
+                <TextBlock x:Name="SelectedStudentInfo" TextWrapping="Wrap" Height="220" />
+              </StackPanel>
+            </ScrollViewer>
+          </Grid>
+        </TabItem>
+      </TabControl>
+
+      <TextBlock Grid.Row="3" x:Name="StatusText" Foreground="#64748B" TextWrapping="Wrap" Margin="0,12,0,0" />
+    </Grid>
+  </Border>
+</Window>
